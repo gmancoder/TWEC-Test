@@ -1,0 +1,54 @@
+extends ../layouts/app_layout
+
+block content
+	script.
+		$(document).keypress(function(e) {
+			if(e.which == 13) {
+				$('#store-info-form').submit();
+			}
+		});
+		$(document).ready(function() {
+			$('#delete-button').click(function() {
+				var storeNumber = $('#store-number').val();
+				if(confirm('Are you sure?')) {
+					location.href = "/stores/delete/" + storeNumber;
+				}
+			});
+		});
+	.row
+		.col-md-12
+			form(action='/stores/update', method='POST', id='store-info-form' class='form form-horizontal')
+				.form-group
+					label(for='region', class='control-label col-lg-2' ) Region:
+					.col-lg-4
+						input(type='number', id='region' name='region', class='form-control', value='#{store["Region #"]}', required='required')
+					label(for='district', class='control-label col-lg-2') District:
+					.col-lg-4
+						input(type='number', id='district', name='district', class='form-control', value='#{store["District #"]}', required='required')
+				.form-group
+					label(for='store-number', class='control-label col-lg-2') Store
+					.col-lg-10
+						input(type='number', name='store-number', id='store-number', class='form-control' value='#{store["Store #"]}', required='required')
+				.form-group
+					label(for='store-name', class='control-label col-lg-2') Store Name
+					.col-lg-10
+						input(type='text', name='store-name', id='store-name', class='form-control' value='#{store["Store Name"]}')
+				.form-group
+					label(for='store-address', class='control-label col-lg-2') Store Address
+					.col-lg-10
+						input(type='text', name='store-address', id='store-address', class='form-control' value='#{store["Address"]}')
+				.form-group
+					label(for='store-city', class='control-label col-lg-2') City
+					.col-lg-10
+						input(type='text', name='store-city', id='store-city', class='form-control' value='#{store["City"]}')
+				.form-group
+					label(for='store-state', class='control-label col-lg-2') State
+					.col-lg-10
+						input(type='text', name='store-state', id='store-state', class='form-control' value='#{store["State"]}')
+				.form-group
+					label(for='store-zip', class='control-label col-lg-2') Zip
+					.col-lg-10
+						input(type='text', name='store-zip', id='store-zip', class='form-control' value='#{store["zip code"]}')
+				.form-group
+					a(href="/stores" class="btn btn-default") Back
+					button(class="btn btn-danger" id="delete-button") Delete

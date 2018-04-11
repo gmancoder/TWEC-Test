@@ -1,0 +1,16 @@
+extends ../layouts/app_layout
+
+block content
+	script.
+		$(document).keypress(function(e) {
+			if(e.which == 13) {
+				$('#store-info-form').submit();
+			}
+		});
+	.row
+		.col-md-12
+			form(action='/stores/search', method='POST', id='store-info-form')
+				.form-group
+					label(for='store-number' class='control-label col-lg-2') Store:
+					div(class="col-lg-10")
+						input(type="text", name="store-number", id="store-number" class="form-control")
